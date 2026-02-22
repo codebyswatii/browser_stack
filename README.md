@@ -31,22 +31,22 @@ Create a `.env` file:
 
 ### 1. Create Virtual Environment
 
-python -m venv venv
-venv\Scripts\activate
+- python -m venv venv
+- venv\Scripts\activate
 
 ### 2. Install Dependencies
-pip install -r requirements.txt
+- pip install -r requirements.txt
 
 ### 3. Run Parallel BrowserStack Tests
-python browser_stack.py
+- python browser_stack.py
 
 ## 🌟 Features
 
-✅ Parallel Cross-Browser Execution
-✅ Automatic Cookie Handling
-✅ Article Title Extraction
-✅ Content Scraping with Fallbacks
-✅ Automatic Translation via API
-✅ High-Resolution Image Download
-✅ Structured File Naming
-✅ BrowserStack Cloud Execution
+- ✅ Parallel Cross-Browser Execution
+- ✅ Automatic Cookie Handling
+- ✅ Article Title Extraction
+- ✅ Content Scraping with Fallbacks
+- ✅ Automatic Translation via API
+- ✅ High-Resolution Image Download
+- ✅ Structured File Naming
+- ✅ BrowserStack Cloud Execution

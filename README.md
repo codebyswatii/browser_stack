@@ -22,10 +22,8 @@ The script:
 ## 🔐 Environment Setup
 
 Create a `.env` file:
--BROWSERSTACK_USERNAME=your_username
--BROWSERSTACK_ACCESS_KEY=your_access_key
-
-⚠ Do NOT push this file to GitHub.
+- BROWSERSTACK_USERNAME=your_username
+- BROWSERSTACK_ACCESS_KEY=your_access_key
 
 ---
 

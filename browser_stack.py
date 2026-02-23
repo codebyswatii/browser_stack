@@ -40,9 +40,20 @@ def run_test(os_name, os_version, browser_name=None, browser_version=None, devic
     )
 
     try:
-        # driver.get(URL)
-        # print(f"{bstack_options['sessionName']} → {driver.title}")
         run_scraper(driver, session_prefix)
+
+        # If everything runs fine → mark passed
+        driver.execute_script(
+            'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason":"Script executed successfully"}}'
+        )
+
+    except Exception as e:
+
+        # If error happens → mark failed
+        driver.execute_script(
+            f'browserstack_executor: {{"action": "setSessionStatus", "arguments": {{"status":"failed","reason":"{str(e)}"}}}}'
+        )
+
     finally:
         driver.quit()
 

@@ -14,6 +14,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 def run_scraper(driver,prefix):
     wait = WebDriverWait(driver, 20)
+    translated_titles = []
 
     driver.get("https://elpais.com/opinion/")
     time.sleep(3)
@@ -121,6 +122,8 @@ def run_scraper(driver,prefix):
         print("\nTitle (English):")
         print(translated_title)
 
+        translated_titles.append(translated_title)
+
         # ---- Get Content ----
         try:
             content_div = driver.find_element(
@@ -195,3 +198,49 @@ def run_scraper(driver,prefix):
         except Exception as e:
             print("Image download error:", e)
 
+        # -------------------------
+    # Analyze Repeated Words
+    # -------------------------
+
+    from collections import Counter
+    import string
+
+    stop_words = {
+    "is", "an", "the", "and", "or", "of", "to", "in",
+    "on", "for", "with", "at", "by", "from", "as",
+    "that", "this", "it", "be", "are", "was", "were"
+    }
+
+    all_words = []
+
+    for title in translated_titles:
+        # Convert to lowercase
+        title = title.lower()
+
+        # Remove punctuation
+        title = title.translate(str.maketrans("", "", string.punctuation))
+
+        words = title.split()
+
+        # Remove stop words
+        filtered_words = [
+        word for word in words
+        if word not in stop_words and len(word) > 2
+        ]
+
+        all_words.extend(filtered_words)
+
+    # Count frequency
+    word_counts = Counter(all_words)
+
+    print("\nWords repeated more than twice across all translated headers:\n")
+
+    found = False
+
+    for word, count in word_counts.items():
+        if count > 2:
+            print(f"{word} → {count} times")
+            found = True
+
+    if not found:
+        print("No words were repeated more than twice.")

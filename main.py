@@ -1,6 +1,6 @@
 import time
-import random
 import requests
+import re
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -9,8 +9,6 @@ import os
 
 if not os.path.exists("article_images"):
     os.makedirs("article_images")
-
-from selenium.webdriver.support.ui import WebDriverWait
 
 def run_scraper(driver,prefix):
     wait = WebDriverWait(driver, 20)
@@ -48,7 +46,8 @@ def run_scraper(driver,prefix):
         link = a.get_attribute("href")
 
         # Strong filter to avoid section pages
-        if link and "/202" in link and link.endswith(".html"):
+        # if link and "/202" in link and link.endswith(".html"):
+        if link and re.search(r"/20\d{2}-", link) and link.endswith(".html"):
             if link not in links:
                 links.append(link)
 
@@ -225,7 +224,7 @@ def run_scraper(driver,prefix):
         # Remove stop words
         filtered_words = [
         word for word in words
-        if word not in stop_words and len(word) > 2
+        if word not in stop_words
         ]
 
         all_words.extend(filtered_words)

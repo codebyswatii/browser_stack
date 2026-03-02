@@ -5,8 +5,6 @@ from config import BROWSERSTACK_URL
 
 
 
-# URL = "https://elpais.com/opinion/"
-
 def run_test(os_name, os_version, browser_name=None, browser_version=None, device_name=None):
     bstack_options = {
         "os": os_name,
@@ -29,10 +27,7 @@ def run_test(os_name, os_version, browser_name=None, browser_version=None, devic
 
     options.set_capability("bstack:options", bstack_options)
 
-    # driver = webdriver.Remote(
-    #     command_executor=f"https://{USERNAME}:{ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub",
-    #     options=options
-    # )
+
 
     driver = webdriver.Remote(
     command_executor=BROWSERSTACK_URL,
